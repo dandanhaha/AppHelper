@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="index.css"/>
+    <script type="text/javascript">
+        var body, div = document.createElement("div");
+
+        window.onload = function () {
+            body = document.body;
+            var o = call_android({c: 'onload'}).v;
+            for (var k in o) {
+                body.appendChild($('<div item><div item-label="">' + k + ':</div><div item-value>' + o[k] + '</div></div>'));
+            }
+            body.ontouchstart = function (e) {
+                e.preventDefault();
+            };
+        };
+
+        function $(v) {
+            div.innerHTML = v;
+            return div.children[0];
+        }
+
+        function UJStr(v) {
+            switch (typeof v) {
+                case 'string':
+                    return '"' + v + '"';
+                case 'number':
+                    return v;
+                default:
+                    if (v instanceof Array) {
+                        var s = '';
+                        for (var i = 0; i < v.length; i++) {
+                            if (s != '')
+                                s += ',';
+                            s += UJStr(v[i]);
+                        }
+                        return '[' + s + ']';
+                    } else
+                        return UOStr(v);
+            }
+        }
+
+        function UOStr(obj) {
+            if (!obj)
+                return null;
+            var s = '';
+            for (var k in obj) {
+                if (s != '')
+                    s += ',';
+                s += '"' + k + '":' + UJStr(obj[k]);
+            }
+            return '{' + s + '}';
+        }
+
+        function call_android(o) {
+            return JSON.parse(jsi.cmd(UOStr(o)));
+        }
+
+        function android_call(o) {
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
