@@ -2,6 +2,8 @@ package dd.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.*;
 import android.os.Build;
@@ -42,6 +44,13 @@ public class U {
         }
     }
 
+    public static void delFile(String name) {
+        try {
+            new File(name).delete();
+        } catch (Exception e) {
+        }
+    }
+
     public static String cacheFile(String name) {
         try {
             return ACTIVITY.getCacheDir().getAbsolutePath() + "/" + name;
@@ -60,6 +69,15 @@ public class U {
 
     public static void closeActivity() {
         ACTIVITY.finish();
+    }
+
+    public static void startActivity(String name) {
+        try {
+            Intent intent = ACTIVITY.getPackageManager().getLaunchIntentForPackage(name);
+            ACTIVITY.startActivity(intent);
+        } catch (Exception e) {
+            U.log(e);
+        }
     }
 
     public static String encrypt(String data, String KEY, String IV) {

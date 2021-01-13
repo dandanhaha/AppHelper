@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             U.init(this);
+            U.delFile(Client.APK);
             WebView wv = findViewById(R.id.wv);
             UI.init(wv);
             wv.loadUrl("file:///android_asset/index.html");

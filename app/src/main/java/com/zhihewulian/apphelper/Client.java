@@ -133,8 +133,14 @@ public class Client {
             case "restart"://{"c":"restart"}
                 U.restartActivity();
                 break;
-            case "close":
+            case "close"://{"c":"close"}
                 U.closeActivity();
+                break;
+            case "start"://{"c":"start","v":"$packageName"}
+                String n = jo.getString("v");
+                if (n.equals(""))
+                    n = "com.zhihewulian.gateway";
+                U.startActivity(n);
                 break;
         }
     }
