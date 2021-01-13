@@ -117,6 +117,7 @@ public class Client {
     }
 
     private void Cmd(JSONObject jo) throws Exception {
+        U.log(jo);
         switch (jo.getString("c")) {
             case "type"://{"c":"type","v":"$typename"}
                 api = APIFactory.create(jo.getString("v"));
@@ -131,6 +132,9 @@ public class Client {
                 break;
             case "restart"://{"c":"restart"}
                 U.restartActivity();
+                break;
+            case "close":
+                U.closeActivity();
                 break;
         }
     }

@@ -52,11 +52,14 @@ public class U {
 
     public static void restartActivity() {
         try {
-            Intent intent = ACTIVITY.getIntent();
             ACTIVITY.finish();
-            ACTIVITY.startActivity(intent);
+            ACTIVITY.startActivity(ACTIVITY.getIntent());
         } catch (Exception e) {
         }
+    }
+
+    public static void closeActivity() {
+        ACTIVITY.finish();
     }
 
     public static String encrypt(String data, String KEY, String IV) {
